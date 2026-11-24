@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
+/* Neutral light theme by default; dark theme via [data-theme="dark"]. One restrained accent. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-2: #f2f2ef;
+  --line: #e4e3df;
+  --line-strong: #d3d2cc;
+  --ink: #1b1b19;
+  --ink-2: #44443f;
+  --muted: #76756e;
+  --accent: #2b50d6;
+  --accent-soft: #e9eefc;
+  --pos: #2f7d57;
+  --pos-soft: #e6f2ec;
+  --neg: #b4443a;
+  --neg-soft: #f8e9e7;
+  --warn: #a8731a;
+  --warn-soft: #f7efdc;
+  --chart-1: #2b50d6;
+  --chart-2: #9aa7d8;
+  --chart-3: #c9c8c1;
+  --shadow: 0 1px 2px rgba(20, 20, 15, 0.04);
+}
+
+[data-theme="dark"] {
+  --bg: #111110;
+  --surface: #181817;
+  --surface-2: #1f1f1d;
+  --line: #2b2b28;
+  --line-strong: #3a3a36;
+  --ink: #ececE8;
+  --ink-2: #c3c2bb;
+  --muted: #8d8c84;
+  --accent: #7f9cf5;
+  --accent-soft: #1e2540;
+  --pos: #62b68a;
+  --pos-soft: #172a21;
+  --neg: #e0786d;
+  --neg-soft: #301d1b;
+  --warn: #d8a850;
+  --warn-soft: #2b2417;
+  --chart-1: #7f9cf5;
+  --chart-2: #46507a;
+  --chart-3: #3a3a36;
+  --shadow: none;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-line: var(--line);
+  --color-linestrong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accentsoft: var(--accent-soft);
+  --color-pos: var(--pos);
+  --color-possoft: var(--pos-soft);
+  --color-neg: var(--neg);
+  --color-negsoft: var(--neg-soft);
+  --color-warn: var(--warn);
+  --color-warnsoft: var(--warn-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+.tabnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+}
+.print-only {
+  display: none;
+}
+
+/* Scroll containers must be positioned so visually hidden (sr-only) children are clipped with them;
+   otherwise they widen the whole page on small screens. */
+.overflow-x-auto {
+  position: relative;
 }
