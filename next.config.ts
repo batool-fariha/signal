@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Signal keeps all state in the browser and fetches nothing on the server, so the
+  // cache-components / instant-navigation machinery would only add friction.
   turbopack: {
     rules: {
       "*.css": {

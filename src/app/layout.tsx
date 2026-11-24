@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Shell } from "@/components/Shell";
@@ -24,9 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen">
         <WorkspaceProvider>
-          <Suspense fallback={<div className="grid min-h-screen place-items-center text-sm text-muted">Opening workspace…</div>}>
-            <Shell>{children}</Shell>
-          </Suspense>
+          <Shell>{children}</Shell>
         </WorkspaceProvider>
       </body>
     </html>
