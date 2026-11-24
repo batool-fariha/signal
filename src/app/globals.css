@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* `dark:` utilities follow the same attribute as the CSS variables below. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* Neutral light theme by default; dark theme via [data-theme="dark"]. One restrained accent. */
 :root {
   --bg: #f7f7f5;

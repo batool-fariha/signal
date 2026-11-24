@@ -3,40 +3,15 @@ import { useState } from "react";
 import { Button, Card, Notice, PageHeader, Segmented } from "@/components/ui";
 import { heuristicProvider } from "@/lib/ai/provider";
 import { useWorkspace } from "@/lib/store";
-
-type Theme = "light" | "dark" | "system";
-
-function applyTheme(t: Theme) {
-  const dark = t === "dark" || (t === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
-  document.documentElement.toggleAttribute("data-theme", false);
-  if (dark) document.documentElement.setAttribute("data-theme", "dark");
-  else document.documentElement.removeAttribute("data-theme");
-}
+import { setMode, useThemeMode, type ThemeMode } from "@/lib/theme";
 
 export default function Settings() {
   const { workspace, renameWorkspace, deleteWorkspace } = useWorkspace();
   const [draft, setDraft] = useState<string | null>(null);
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Settings only renders after the workspace has loaded in the browser, so reading storage here is safe.
-    try {
-      const saved = localStorage.getItem("signal.theme");
-      return saved === "dark" || saved === "light" ? saved : "system";
-    } catch {
-      return "system";
-    }
-  });
+  const theme = useThemeMode();
   const [confirm, setConfirm] = useState(false);
   const name = draft ?? workspace?.name ?? "";
   const setName = (v: string) => setDraft(v);
-
-  function pick(t: Theme) {
-    setTheme(t);
-    try {
-      if (t === "system") localStorage.removeItem("signal.theme");
-      else localStorage.setItem("signal.theme", t);
-    } catch {}
-    applyTheme(t);
-  }
 
   if (!workspace) return null;
   return (
@@ -53,7 +28,7 @@ export default function Settings() {
         </Card>
 
         <Card title="Appearance">
-          <Segmented<Theme> label="Theme" value={theme} onChange={pick} options={[{ value: "light", label: "Light" }, { value: "dark", label: "Dark" }, { value: "system", label: "System" }]} />
+          <Segmented<ThemeMode> label="Theme" value={theme} onChange={setMode} options={[{ value: "light", label: "Light" }, { value: "dark", label: "Dark" }, { value: "system", label: "System" }]} />
         </Card>
 
         <Card title="Analysis engine">

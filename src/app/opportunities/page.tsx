@@ -10,7 +10,10 @@ import type { Level, PriorityFactor } from "@/lib/types";
 function Cell({ f }: { f: PriorityFactor }) {
   return (
     <td className="px-2 py-3 align-top">
-      <div className="w-20"><LevelBadge level={f.level} />{f.level !== "unknown" && <div className="mt-1.5"><Meter value={f.score} label="score" /></div>}</div>
+      <div className="w-20">
+        <span className="text-xs capitalize text-ink2">{f.level}</span>
+        {f.level !== "unknown" && <div className="mt-1.5"><Meter value={f.score} label={`${f.level} score`} /></div>}
+      </div>
     </td>
   );
 }

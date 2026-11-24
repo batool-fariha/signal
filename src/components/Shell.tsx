@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { useWorkspace } from "@/lib/store";
 import { Button, Notice, Spinner } from "./ui";
+import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -39,7 +40,10 @@ function CreateWorkspace() {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-xl flex-col justify-center px-6 py-12">
-      <Logo />
+      <div className="flex items-center justify-between">
+        <Logo />
+        <ThemeToggle />
+      </div>
       <h1 className="mt-8 text-3xl font-semibold text-ink">Turn scattered customer feedback into product signals.</h1>
       <p className="mt-3 text-[15px] leading-relaxed text-ink2">
         Import support tickets, reviews, call notes or survey answers. Signal groups them into themes, shows the evidence behind each one, and suggests what is worth investigating. It helps you decide; it does not decide for you.
@@ -90,7 +94,10 @@ export function Shell({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <p className="mt-auto px-2 text-[11px] leading-snug text-muted">Priorities and trends are suggestions for your judgement, not facts.</p>
+          <div className="mt-auto space-y-3 px-2">
+            <ThemeToggle withLabel className="w-full" />
+            <p className="text-[11px] leading-snug text-muted">Priorities and trends are suggestions for your judgement, not facts.</p>
+          </div>
         </div>
       </aside>
 
@@ -98,7 +105,10 @@ export function Shell({ children }: { children: ReactNode }) {
         <header className="no-print sticky top-0 z-10 border-b border-line bg-surface md:hidden">
           <div className="flex items-center justify-between px-4 py-2.5">
             <Logo />
-            <span className="max-w-[45%] truncate text-xs text-muted">{workspace.name}</span>
+            <span className="flex items-center gap-2">
+              <span className="max-w-[35vw] truncate text-xs text-muted">{workspace.name}</span>
+              <ThemeToggle />
+            </span>
           </div>
           <nav aria-label="Main" className="flex gap-1 overflow-x-auto px-3 pb-2">
             {NAV.map(({ href, label, icon: Icon }) => (

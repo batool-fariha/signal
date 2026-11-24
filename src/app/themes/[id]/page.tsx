@@ -14,7 +14,7 @@ import { FEEDBACK_TYPE_LABELS, THEME_STATUSES, THEME_STATUS_LABELS, type Level, 
 function Factor({ name, f }: { name: string; f: PriorityFactor }) {
   return (
     <div className="grid gap-x-4 gap-y-1 py-3 sm:grid-cols-[150px_1fr]">
-      <div className="flex items-center gap-2 text-[13px] font-medium text-ink">{name} <LevelBadge level={f.level} /></div>
+      <div className="flex items-center gap-2 text-[13px] font-medium text-ink">{name} <span className="text-xs font-normal capitalize text-muted">{f.level}</span></div>
       <div>
         {f.level !== "unknown" && <Meter value={f.score} label={name} />}
         <p className="mt-1.5 text-xs text-muted">{f.rationale}</p>

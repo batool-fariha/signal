@@ -45,8 +45,8 @@ export function HBar({ data, label, color = "var(--chart-1)" }: { data: { name: 
   return (
     <ul aria-label={label} className="space-y-2.5">
       {data.map((d) => (
-        <li key={d.name} className="grid grid-cols-[minmax(0,40%)_1fr_auto] items-center gap-3 text-[13px]">
-          <span className="truncate text-ink2" title={d.name}>{d.name}</span>
+        <li key={d.name} className="grid grid-cols-[minmax(0,44%)_1fr_auto] items-center gap-3 text-[13px]">
+          <span className="leading-snug text-ink2">{d.name}</span>
           <span aria-hidden className="h-2 rounded-sm bg-surface2">
             <span className="block h-full rounded-sm" style={{ width: `${(d.value / max) * 100}%`, background: color }} />
           </span>
