@@ -6,6 +6,8 @@
 
 **Try it: https://signal-voc.vercel.app** (choose "Start with the sample dataset"; nothing is uploaded and there is no sign-up)
 
+![A walkthrough of Signal: the welcome screen, the overview dashboard with feedback volume and sentiment, the themes list, a theme page with customer quotes and affected segments, and a generated product brief that labels each section as observed, interpretation or suggestion](docs/img/demo.gif)
+
 Product teams get feedback from support tickets, app reviews, sales calls, interviews, surveys and Slack. It is fragmented, repetitive and hard to turn into a decision. Signal imports it, groups it into themes, shows the customer evidence behind each theme, and suggests what is worth investigating. It is built to help a product manager decide, not to decide for them.
 
 It is not a summariser and not a chatbot. It is an analysis workspace: a table, a dashboard and a set of themes you can open up and check.
