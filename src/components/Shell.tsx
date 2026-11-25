@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import { useWorkspace } from "@/lib/store";
 import { Notice, Spinner } from "./ui";
+import { Footer } from "./Footer";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
@@ -91,6 +92,7 @@ export function Shell({ children }: { children: ReactNode }) {
           {saveError && <div className="mb-4"><Notice tone="warn">{saveError}</Notice></div>}
           {children}
         </main>
+        <Footer />
       </div>
     </div>
   );

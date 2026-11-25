@@ -11,9 +11,12 @@ import { buildThemes } from "@/lib/engine/themes";
 import { buildFlowdeskSample } from "@/lib/sample/flowdesk";
 import { useWorkspace } from "@/lib/store";
 import type { PriorityFactor, Theme } from "@/lib/types";
+import { Footer } from "./Footer";
 import { ThemeToggle } from "./ThemeToggle";
 
-const GITHUB = "https://github.com/batool-fariha/signal";
+import { SITE } from "@/lib/site";
+
+const GITHUB = SITE.repo;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /** Fades content up once as it enters the viewport. Static under reduced motion. */
@@ -358,13 +361,7 @@ export function Landing() {
         </section>
       </main>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-5 py-6 text-xs text-muted">
-          <Logo />
-          <span>Open source under MIT. Analysis runs entirely in your browser.</span>
-          <a href={GITHUB} className="hover:text-ink">Source on GitHub</a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
