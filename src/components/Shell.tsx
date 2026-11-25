@@ -3,9 +3,10 @@ import clsx from "clsx";
 import { BarChart3, FileText, Inbox, Layers, LayoutDashboard, Settings, Target } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useWorkspace } from "@/lib/store";
-import { Button, Notice, Spinner } from "./ui";
+import { Notice, Spinner } from "./ui";
+import { Landing } from "./Landing";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
@@ -28,43 +29,6 @@ function Logo() {
   );
 }
 
-function CreateWorkspace() {
-  const { createWorkspace } = useWorkspace();
-  const [name, setName] = useState("");
-  const [busy, setBusy] = useState<null | "sample" | "blank">(null);
-
-  async function go(sample: boolean) {
-    setBusy(sample ? "sample" : "blank");
-    await createWorkspace(name || (sample ? "Flowdesk feedback" : "My workspace"), sample);
-  }
-
-  return (
-    <div className="mx-auto flex min-h-screen max-w-xl flex-col justify-center px-6 py-12">
-      <div className="flex items-center justify-between">
-        <Logo />
-        <ThemeToggle />
-      </div>
-      <h1 className="mt-8 text-3xl font-semibold text-ink">Turn scattered customer feedback into product signals.</h1>
-      <p className="mt-3 text-[15px] leading-relaxed text-ink2">
-        Import support tickets, reviews, call notes or survey answers. Signal groups them into themes, shows the evidence behind each one, and suggests what is worth investigating. It helps you decide; it does not decide for you.
-      </p>
-      <div className="mt-8 rounded-lg border border-line bg-surface p-5 shadow-[var(--shadow)]">
-        <label htmlFor="ws-name" className="text-[13px] font-medium text-ink">Name your workspace</label>
-        <input id="ws-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Acme product feedback" maxLength={80} className="mt-2 h-10 w-full rounded-md border border-linestrong bg-bg px-3 text-sm text-ink placeholder:text-muted" />
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Button variant="primary" disabled={busy !== null} onClick={() => go(true)}>
-            {busy === "sample" ? "Loading sample…" : "Start with the sample dataset"}
-          </Button>
-          <Button disabled={busy !== null} onClick={() => go(false)}>
-            {busy === "blank" ? "Creating…" : "Start empty and import my own"}
-          </Button>
-        </div>
-        <p className="mt-3 text-xs text-muted">The sample is 115 fictional entries for Flowdesk, a project management tool. No account or API key is needed, and your data stays in this browser.</p>
-      </div>
-    </div>
-  );
-}
-
 export function Shell({ children }: { children: ReactNode }) {
   const { ready, workspace, saveError } = useWorkspace();
   const path = usePathname();
@@ -76,7 +40,7 @@ export function Shell({ children }: { children: ReactNode }) {
       </div>
     );
   }
-  if (!workspace) return <CreateWorkspace />;
+  if (!workspace) return <Landing />;
 
   const active = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 
