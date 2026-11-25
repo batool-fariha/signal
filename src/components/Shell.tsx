@@ -1,12 +1,13 @@
 "use client";
 import clsx from "clsx";
-import { BarChart3, FileText, Inbox, Layers, LayoutDashboard, Settings, Target } from "lucide-react";
+import { FileText, Inbox, Layers, LayoutDashboard, Settings, Target } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import { useWorkspace } from "@/lib/store";
 import { Notice, Spinner } from "./ui";
 import { Footer } from "./Footer";
+import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
@@ -17,17 +18,6 @@ const NAV = [
   { href: "/reports", label: "Reports", icon: FileText },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
-
-function Logo() {
-  return (
-    <span className="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-ink">
-      <span aria-hidden className="grid size-6 place-items-center rounded-md bg-ink text-bg">
-        <BarChart3 className="size-3.5" />
-      </span>
-      Signal
-    </span>
-  );
-}
 
 export function Shell({ children }: { children: ReactNode }) {
   const { ready, workspace, saveError } = useWorkspace();

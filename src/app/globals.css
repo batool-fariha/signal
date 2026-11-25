@@ -5,6 +5,11 @@
 
 /* Neutral light theme by default; dark theme via [data-theme="dark"]. One restrained accent. */
 :root {
+  /* Brand blue: the same in both themes so solid brand blocks keep white text readable. */
+  --brand: #2b50d6;
+  --brand-deep: #1a2f86;
+  --brand-ink: #0f1a4d;
+  --brand-sky: #7cc4ff;
   --bg: #f7f7f5;
   --surface: #ffffff;
   --surface-2: #f2f2ef;
@@ -67,6 +72,10 @@
   --color-negsoft: var(--neg-soft);
   --color-warn: var(--warn);
   --color-warnsoft: var(--warn-soft);
+  --color-brand: var(--brand);
+  --color-branddeep: var(--brand-deep);
+  --color-brandink: var(--brand-ink);
+  --color-brandsky: var(--brand-sky);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -134,4 +143,19 @@ h1, h2, h3 {
    otherwise they widen the whole page on small screens. */
 .overflow-x-auto {
   position: relative;
+}
+
+/* Landing page marquee: one band of real theme names. Pauses on hover; static for reduced motion. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 48s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }

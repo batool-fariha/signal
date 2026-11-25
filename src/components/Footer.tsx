@@ -1,4 +1,5 @@
-import { BarChart3, Code } from "lucide-react";
+import { Code } from "lucide-react";
+import { Logo } from "./Logo";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { GithubMark, LinkedinMark } from "./BrandIcons";
@@ -12,10 +13,7 @@ export function Footer() {
     <footer className="no-print border-t border-line bg-surface/40 backdrop-blur-sm">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-6 px-5 py-8">
         <div>
-          <span className="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-ink">
-            <span aria-hidden className="grid size-6 place-items-center rounded-md bg-ink text-bg"><BarChart3 className="size-3.5" /></span>
-            {SITE.name}
-          </span>
+          <Logo />
           <p className="mt-2 text-sm text-ink2">
             Designed and built by{" "}
             <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" className={textLink}>{SITE.author}</a>.

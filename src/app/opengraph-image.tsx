@@ -22,13 +22,9 @@ export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#f7f7f5", padding: "64px 72px", fontFamily: "sans-serif" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div style={{ display: "flex", width: 48, height: 48, borderRadius: 10, background: ink, alignItems: "flex-end", justifyContent: "center", gap: 5, paddingBottom: 12 }}>
-            <div style={{ display: "flex", width: 6, height: 12, background: "#f7f7f5", borderRadius: 2 }} />
-            <div style={{ display: "flex", width: 6, height: 20, background: "#f7f7f5", borderRadius: 2 }} />
-            <div style={{ display: "flex", width: 6, height: 16, background: "#f7f7f5", borderRadius: 2 }} />
-          </div>
-          <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: ink }}>Signal</div>
+        <div style={{ display: "flex", alignItems: "flex-end", fontSize: 40, fontWeight: 700, color: ink, letterSpacing: -1.8 }}>
+          signal
+          <div style={{ display: "flex", width: 10, height: 10, borderRadius: 999, background: accent, marginLeft: 2, marginBottom: 9 }} />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
