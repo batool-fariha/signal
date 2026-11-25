@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Shell } from "@/components/Shell";
 import { WorkspaceProvider } from "@/lib/store";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
+const description = "Turn feedback noise into product signal. Signal groups support tickets, reviews and interviews into themes and shows the customer words behind every one. Free, open source, runs in your browser.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://signal-voc.vercel.app"),
   title: "Signal: customer feedback intelligence",
-  description: "Turn scattered customer feedback into actionable product signals. Open source, runs in your browser, no API key needed.",
+  description,
+  openGraph: { type: "website", siteName: "Signal", title: "Signal: customer feedback intelligence", description, url: "/" },
+  twitter: { card: "summary_large_image", title: "Signal: customer feedback intelligence", description },
 };
 
 // Applies the saved theme before first paint so dark mode does not flash.
@@ -23,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen">
         <WorkspaceProvider>
-          <Shell>{children}</Shell>
+          {children}
         </WorkspaceProvider>
       </body>
     </html>

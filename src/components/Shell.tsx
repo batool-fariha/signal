@@ -2,15 +2,14 @@
 import clsx from "clsx";
 import { BarChart3, FileText, Inbox, Layers, LayoutDashboard, Settings, Target } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, type ReactNode } from "react";
 import { useWorkspace } from "@/lib/store";
 import { Notice, Spinner } from "./ui";
-import { Landing } from "./Landing";
 import { ThemeToggle } from "./ThemeToggle";
 
 const NAV = [
-  { href: "/", label: "Overview", icon: LayoutDashboard },
+  { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/feedback", label: "Feedback", icon: Inbox },
   { href: "/themes", label: "Themes", icon: Layers },
   { href: "/opportunities", label: "Opportunities", icon: Target },
@@ -32,17 +31,22 @@ function Logo() {
 export function Shell({ children }: { children: ReactNode }) {
   const { ready, workspace, saveError } = useWorkspace();
   const path = usePathname();
+  const router = useRouter();
 
-  if (!ready) {
+  // No workspace in this browser yet: the landing page is where one is created.
+  useEffect(() => {
+    if (ready && !workspace) router.replace("/");
+  }, [ready, workspace, router]);
+
+  if (!ready || !workspace) {
     return (
       <div className="grid min-h-screen place-items-center">
-        <Spinner label="Opening workspace" />
+        <Spinner label={ready ? "Taking you to the start page" : "Opening workspace"} />
       </div>
     );
   }
-  if (!workspace) return <Landing />;
 
-  const active = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
+  const active = (href: string) => path.startsWith(href);
 
   return (
     <div className="min-h-screen md:grid md:grid-cols-[220px_1fr]">
